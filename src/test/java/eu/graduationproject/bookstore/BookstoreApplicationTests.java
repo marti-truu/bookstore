@@ -1,4 +1,4 @@
-package com.graduationproject.bookstore;
+package eu.graduationproject.bookstore;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

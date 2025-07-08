@@ -1,4 +1,4 @@
-package eu.itcrafters.myproject.infrastructure.rest.exception;
+package eu.graduationproject.bookstore.infrastructure.rest.exception;
 
 import lombok.Getter;
 

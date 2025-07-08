@@ -1,8 +1,8 @@
-package com.graduationproject.bookstore.infrastructure.rest;
+package eu.graduationproject.bookstore.infrastructure.rest;
 
-import eu.itcrafters.myproject.infrastructure.rest.error.ApiError;
-import eu.itcrafters.myproject.infrastructure.rest.exception.DataNotFoundException;
-import eu.itcrafters.myproject.infrastructure.rest.exception.ForbiddenException;
+import eu.graduationproject.bookstore.infrastructure.rest.error.ApiError;
+import eu.graduationproject.bookstore.infrastructure.rest.exception.DataNotFoundException;
+import eu.graduationproject.bookstore.infrastructure.rest.exception.ForbiddenException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
