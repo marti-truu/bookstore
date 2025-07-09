@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Error {
-    SOME_ERROR_ENUM("Some error message");
+    NO_BOOK_EXISTS("Book does not exist");
 
     private final String message;
 }
