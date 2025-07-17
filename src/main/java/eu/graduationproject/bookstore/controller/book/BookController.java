@@ -25,6 +25,8 @@ public class BookController {
     @Operation(summary = "Adds a book", description = "Adds a book. Throws error 'BookGenre not fund' if book genre is not found from the system")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Invalid request body: payload validation failed",
+                    content = @Content(schema = @Schema(implementation = ApiError.class))),
             @ApiResponse(responseCode = "404", description = "BookGenre not found",
                     content = @Content(schema = @Schema(implementation = ApiError.class))),
     })
