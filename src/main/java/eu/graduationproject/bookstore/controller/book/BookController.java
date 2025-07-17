@@ -1,9 +1,9 @@
 package eu.graduationproject.bookstore.controller.book;
 
 
+import eu.graduationproject.bookstore.controller.book.dto.BookDto;
 import eu.graduationproject.bookstore.controller.book.dto.BookInfo;
 import eu.graduationproject.bookstore.infrastructure.rest.error.ApiError;
-import eu.graduationproject.bookstore.controller.book.dto.BookDto;
 import eu.graduationproject.bookstore.service.book.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -50,4 +50,24 @@ public class BookController {
     public List<BookInfo> findAllBooks() {
         return bookService.findAllBooks();
     }
+
+    @PutMapping("/book/{bookId}")
+    @Operation(summary = "Updates a book", description = "Updates a book. If there are any null value fields then won't get updated")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Invalid request body: payload validation failed",
+                    content = @Content(schema = @Schema(implementation = ApiError.class))),
+            @ApiResponse(responseCode = "404", description = "Book does bot exist / BookGenre not found",
+                    content = @Content(schema = @Schema(implementation = ApiError.class))),
+    })
+
+    public void updateBook(@PathVariable Integer bookId, @RequestBody @Valid BookDto bookDto) {
+        bookService.updateBook(bookId, bookDto);
+
+    }
+
+    /*@DeleteMapping("/book/{bookId}")
+    public void deleteBook(@PathVariable Integer bookId) {
+        bookService.deleteBook(bookId);
+    }*/
 }

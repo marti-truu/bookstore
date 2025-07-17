@@ -27,4 +27,8 @@ public interface BookMapper {
     @Mapping(source = "price", target = "price" )
     @Mapping(ignore = true, target = "bookGenre" )
     Book toBook(BookDto bookDto);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @InheritConfiguration(name = "toBook")
+    void updateBook(BookDto bookDto, @MappingTarget Book book);
 }
