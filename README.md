@@ -116,7 +116,7 @@ On startup, Spring Boot will automatically run any `schema.sql` and `data.sql` f
 
 ## Database Structure
 
-![ERD Diagram](docs/ERD.png)
+![img_1.png](img_1.png)
 ---
 
 ## Available Endpoints
