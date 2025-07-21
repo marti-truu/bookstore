@@ -66,8 +66,16 @@ public class BookController {
 
     }
 
-    /*@DeleteMapping("/book/{bookId}")
+    @DeleteMapping("/book/{bookId}")
+    @Operation(summary = "Deletes a book by its ID",
+            description = "Also checks if any sales record exists with this book. If yes then sale record is also deleted")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "Book dose not exist",
+                content = @Content(schema = @Schema(implementation = ApiError.class)))
+    })
+
     public void deleteBook(@PathVariable Integer bookId) {
         bookService.deleteBook(bookId);
-    }*/
+    }
 }

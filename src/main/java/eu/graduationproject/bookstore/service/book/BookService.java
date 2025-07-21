@@ -9,14 +9,12 @@ import eu.graduationproject.bookstore.persistence.book.BookMapper;
 import eu.graduationproject.bookstore.persistence.book.BookRepository;
 import eu.graduationproject.bookstore.persistence.bookgenre.BookGenre;
 import eu.graduationproject.bookstore.persistence.bookgenre.BookGenreRepository;
-import eu.graduationproject.bookstore.persistence.sale.Sale;
 import eu.graduationproject.bookstore.persistence.sale.SaleRepository;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,12 +34,10 @@ public class BookService {
     }
 
 
-
     public BookDto findBook(Integer bookId) {
         Book book = getValidBook(bookId);
         return bookMapper.toBookDto(book);
     }
-
 
 
     public List<BookInfo> findAllBooks() {
@@ -58,18 +54,20 @@ public class BookService {
         bookRepository.save(book);
     }
 
-    /*public void deleteBook(Integer bookId) {
+    @Transactional
+    public void deleteBook(Integer bookId) {
         Book book = getValidBook(bookId);
+        saleRepository.findSaleBy(book).ifPresent(sale -> saleRepository.delete(sale));
+        bookRepository.delete(book);
 
-        Optional<Sale> optionalSale = saleRepository.findSaleBy(book);
-        optionalSale.ifPresent( Sale sale -> saleRepository.);
 
+    }
 
-    }*/
     private Book getValidBook(Integer bookId) {
         return bookRepository.findById(bookId)
                 .orElseThrow(() -> new DataNotFoundException(Error.NO_BOOK_EXISTS.getMessage()));
     }
+
     private BookGenre getValidBookGenre(String BookGenreName) {
         return bookGenreRepository.findBookGenreBy(BookGenreName).
                 orElseThrow(() -> new DataNotFoundException(Error.NO_BOOK_GENRE_EXISTS.getMessage()));

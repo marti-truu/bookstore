@@ -1,12 +1,11 @@
 package eu.graduationproject.bookstore.controller.book.dto;
 
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -16,19 +15,19 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookDto implements Serializable {
-    @NonNull
+    @NotNull
     @Size(max = 50)
     private String bookGenre;
 
-    @NonNull
+    @NotNull
     @Size(max = 100)
     private String bookName;
 
-    @NonNull
+    @NotNull
     @Size(max = 50)
     private String author;
 
-    @NonNull
+    @NotNull
     private BigDecimal price;
 }
 
