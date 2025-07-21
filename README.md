@@ -113,6 +113,9 @@ On startup, Spring Boot will automatically run any `schema.sql` and `data.sql` f
 - Use it to insert lookup values, demo rows, or any seed data your application needs on startup.
 
 ---
+## Database Structure
+
+![ERD Diagram](docs/ERD.png)
 
 ## Available Endpoints
 
