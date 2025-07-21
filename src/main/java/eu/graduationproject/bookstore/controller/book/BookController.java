@@ -43,7 +43,8 @@ public class BookController {
                     content = @Content(schema = @Schema(implementation = ApiError.class))),
     })
     public BookDto findBook(@PathVariable Integer bookId) {
-        return bookService.findBook(bookId);}
+        return bookService.findBook(bookId);
+    }
 
     @GetMapping("/books")
     @Operation(summary = "Finds all books", description = "Finds all books")
@@ -72,7 +73,7 @@ public class BookController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "404", description = "Book dose not exist",
-                content = @Content(schema = @Schema(implementation = ApiError.class)))
+                    content = @Content(schema = @Schema(implementation = ApiError.class)))
     })
 
     public void deleteBook(@PathVariable Integer bookId) {

@@ -6,12 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 
-
 public interface BookGenreRepository extends JpaRepository<BookGenre, Integer> {
 
-
-  @Query("select b from BookGenre b where upper(b.genreName) = upper(:genreName)")
-
-
-          Optional<BookGenre> findBookGenreBy(String genreName);
+    @Query("select b from BookGenre b where upper(b.genreName) = upper(:genreName)")
+    Optional<BookGenre> findBookGenreBy(String genreName);
 }

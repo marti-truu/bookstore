@@ -1,10 +1,10 @@
 package eu.graduationproject.bookstore.service.book;
 
+import eu.graduationproject.bookstore.controller.book.dto.BookDto;
 import eu.graduationproject.bookstore.controller.book.dto.BookInfo;
 import eu.graduationproject.bookstore.infrastructure.rest.error.Error;
 import eu.graduationproject.bookstore.infrastructure.rest.exception.DataNotFoundException;
 import eu.graduationproject.bookstore.persistence.book.Book;
-import eu.graduationproject.bookstore.controller.book.dto.BookDto;
 import eu.graduationproject.bookstore.persistence.book.BookMapper;
 import eu.graduationproject.bookstore.persistence.book.BookRepository;
 import eu.graduationproject.bookstore.persistence.bookgenre.BookGenre;
@@ -20,16 +20,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookService {
 
-
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
     private final BookGenreRepository bookGenreRepository;
     private final SaleRepository saleRepository;
 
     public void addBook(BookDto bookDto) {
-        BookGenre bookGenre = getValidBookGenre(bookDto.getBookGenre());
-        Book book = bookMapper.toBook(bookDto);
-        book.setBookGenre(bookGenre);
+        Book book = creatBookFrom(bookDto);
         bookRepository.save(book);
     }
 
@@ -39,18 +36,13 @@ public class BookService {
         return bookMapper.toBookDto(book);
     }
 
-
     public List<BookInfo> findAllBooks() {
         List<Book> books = bookRepository.findAll();
         return bookMapper.toBookInfos(books);
     }
 
-
     public void updateBook(Integer bookId, BookDto bookDto) {
-        Book book = getValidBook(bookId);
-        BookGenre bookGenre = getValidBookGenre(bookDto.getBookGenre());
-        bookMapper.updateBook(bookDto, book);
-        book.setBookGenre(bookGenre);
+        Book book = createUpdatedBookFrom(bookId, bookDto);
         bookRepository.save(book);
     }
 
@@ -61,6 +53,21 @@ public class BookService {
         bookRepository.delete(book);
 
 
+    }
+
+    private Book creatBookFrom(BookDto bookDto) {
+        BookGenre bookGenre = getValidBookGenre(bookDto.getBookGenre());
+        Book book = bookMapper.toBook(bookDto);
+        book.setBookGenre(bookGenre);
+        return book;
+    }
+
+    private Book createUpdatedBookFrom(Integer bookId, BookDto bookDto) {
+        Book book = getValidBook(bookId);
+        BookGenre bookGenre = getValidBookGenre(bookDto.getBookGenre());
+        bookMapper.updateBook(bookDto, book);
+        book.setBookGenre(bookGenre);
+        return book;
     }
 
     private Book getValidBook(Integer bookId) {

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-
 @Data
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor

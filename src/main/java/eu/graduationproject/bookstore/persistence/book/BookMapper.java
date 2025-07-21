@@ -22,10 +22,10 @@ public interface BookMapper {
     List<BookInfo> toBookInfos(List<Book> books);
 
 
-    @Mapping(source = "bookName", target = "name" )
-    @Mapping(source = "author", target = "author" )
-    @Mapping(source = "price", target = "price" )
-    @Mapping(ignore = true, target = "bookGenre" )
+    @Mapping(source = "bookName", target = "name")
+    @Mapping(source = "author", target = "author")
+    @Mapping(source = "price", target = "price")
+    @Mapping(ignore = true, target = "bookGenre")
     Book toBook(BookDto bookDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
